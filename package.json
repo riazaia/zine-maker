@@ -1,0 +1,17 @@
+{
+  "name": "zine-maker",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "build": "npx tsx main.ts",
+    "build:watch": "npx tsx --watch main.ts"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "pdf-lib": "^1.17.1"
+  },
+  "devDependencies": {
+    "@types/node": "^22.7.4"
+  }
+}
