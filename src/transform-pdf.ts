@@ -13,6 +13,9 @@ export async function transformPdf(sourcePdf: PdfData): Promise<PDFDocument> {
   return combinedPdf;
 }
 
+// when printing a half-size zine we need to reorder the pages such that when we fold each page in half, the content appears in the right order
+// when given a page count, this function returns an array with the pages in the right order. e.g. for a 6-page pdf it returns:
+// [ 7, 0, 1, 6, 5, 2, 3, 4 ]
 function getNewOrder(num: number) {
   console.log("order arr start");
   let result: number[] = [];
@@ -35,11 +38,14 @@ function getNewOrder(num: number) {
     j--;
     currentPage++;
   }
+  // transform the resulting array into index zero
   let i0result = result.map((a) => a - 1);
   console.log("order arr end");
   return i0result;
 }
 
+// takes a number "n" and a divisor "d" to test it against. if "n" is divisible by "d", then the function returns "n". if it's not divisble then the function returns the next integer that is. e.g. normalizeNumber(72, 10) returns 80
+// when creating a new pdf, we need the page count to be a multiple of 4
 function normalizeNumber(n: number, d: number) {
   let remainder = n % d;
   if (remainder === 0) {
